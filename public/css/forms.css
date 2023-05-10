@@ -1,0 +1,53 @@
+.form-control {
+  margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.form-control input,
+.form-control textarea {
+  border: 1px solid #a1a1a1;
+  font: inherit;
+  border-radius: 2px;
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+  outline-color: #00695c;
+}
+
+.search-options{
+  display:flex;
+  justify-content: space-between;
+  margin-top:1rem;
+  width:50%;
+}
+
+.info__items{
+  width:20rem;
+  margin:auto;
+}
+
+.info__header{
+  font-weight:bold;
+  text-align:center;
+  margin-top:-1rem;
+}
+
+.info__details{
+  text-align: center;
+  border:1px solid rgba(128, 128, 128, 0.545);
+  margin-top:-1rem;
+}
+
+.addBalance{
+  margin:auto;
+  width:8rem;
+  display:block;
+}

@@ -1,0 +1,23 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    </head>
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <div class="info__items">
+                <p class="info__header" style="margin-top:0;">Username</p>
+                <p class="info__details"><%=user.name%></p>
+                <p class="info__header">Email</p>
+                <p class="info__details"><%= user.email %></p>
+                <p class="info__header">Id</p>
+                <p class="info__details"><%= user.id %></p>
+                <p class="info__header">Balance</p>
+                <p class="info__details">$<%=user.balance%></p>
+            </div>
+            <form action="/admin/info/addBalance" method="POST" class="center_items addBalance">
+                <button type="submit" class="btn">
+                    Add Balance 
+                </button>
+            </form>
+        </main>
+        <%- include('../includes/end.ejs') %>

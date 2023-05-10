@@ -1,0 +1,4 @@
+2- superadmin
+3- different kinds of reports (sql queries (admin))
+4- alp,multithreaded
+5- validation
