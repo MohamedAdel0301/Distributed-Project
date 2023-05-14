@@ -29,6 +29,12 @@
                     </a>
                 </li>
             <% } %>
+            <% if(isSuper) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/moderation' ? 'active' : '' %>" href="/admin/moderation">Moderation
+                    </a>
+                </li>
+            <% } %>
             <li class="main-header__item">
                 <a class="<%= path === '/search' ? 'active' : '' %>" href="/search">Search
                 </a>

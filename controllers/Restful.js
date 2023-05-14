@@ -28,7 +28,8 @@ exports.getProductById = (req,res)=>{
             results: products.length,
             data: {
               product
-            }
+            },
+            link: `dummy/products/${id}`
         });
     })
     .catch(err=>{console.log(err)})
@@ -77,13 +78,13 @@ exports.editProduct = (req,res)=>{
     const updatedCountry = req.body.country;
     Product.findByPk(prodId)
     .then(product => {
-        product.title = updatedTitle;
-        product.price = updatedPrice;
-        product.description = updatedDesc;
-        product.imageUrl=updatedImageUrl;
-        product.brand = updatedBrand;
-        product.country = updatedCountry;
-        product.size = updatedSize;
+        product.title = updatedTitle || product.title;
+        product.price = updatedPrice || product.price;
+        product.description = updatedDesc || product.description;
+        product.imageUrl=updatedImageUrl || product.imageUrl;
+        product.brand = updatedBrand || product.brand;
+        product.country = updatedCountry || product.country;
+        product.size = updatedSize || product.size;
         return product.save()
         .then(result => {
             res.status(200).json({

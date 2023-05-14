@@ -9,11 +9,11 @@
             <div class="image">
                 <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
             </div>
-            <h2><%= product.price %></h2>
-            <p><%= product.description %></p>
-            <p><%= product.size %></p>
-            <p><%= product.brand %></p>
-            <p><%= product.country %></p>
+            <h3>Price: $<%= product.price %></h3>
+            <p>Product Description: <em><%=product.description%></em></p>
+            <p>Size: <strong><%=product.size%></strong></p>
+            <p>Brand: <strong><%=product.brand%></strong></p>
+            <p>Country of Manufacture: <strong><%= product.country %></strong></p>
             <% if(isAuthenticated){ %>
             <%- include('../includes/add-to-cart.ejs', {product: product}) %>
             <% } %>

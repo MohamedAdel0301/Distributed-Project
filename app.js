@@ -56,8 +56,14 @@ app.use((req, res, next) => {
     .catch(err => console.log(err));
 });
 
+//middlewares to check authentication and supertypes and setting response local variables accordingly.
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.isSuper = req.session.isSuper;
   next();
 });
 

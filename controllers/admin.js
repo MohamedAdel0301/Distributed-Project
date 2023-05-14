@@ -5,8 +5,7 @@ exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
-    editing: false,
-    isAuthenticated: req.session.isLoggedIn
+    editing: false
   });
 };
 
@@ -53,8 +52,7 @@ exports.getEditProduct = (req, res, next) => {
         pageTitle: 'Edit Product',
         path: '/admin/edit-product',
         editing: editMode,
-        product: product,
-        isAuthenticated:req.session.isLoggedIn
+        product: product
       });
     })
     .catch(err => console.log(err));
@@ -73,13 +71,13 @@ exports.postEditProduct = (req, res, next) => {
     if(product.userId.toString() !== req.session.user.id.toString()){
       return res.redirect('/')
     }
-    product.title = updatedTitle;
-    product.price = updatedPrice;
-    product.description = updatedDesc;
-    product.imageUrl=updatedImageUrl;
-    product.brand = updatedBrand;
-    product.country = updatedCountry;
-    product.size = updatedSize;
+    product.title = updatedTitle || product.title;
+    product.price = updatedPrice || product.price;
+    product.description = updatedDesc || product.description;
+    product.imageUrl=updatedImageUrl || product.imageUrl;
+    product.brand = updatedBrand || product.brand;
+    product.country = updatedCountry || product.country;
+    product.size = updatedSize || product.size;
     return product.save()
     .then(result => {
       res.redirect('/admin/products');

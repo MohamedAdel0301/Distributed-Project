@@ -29,4 +29,6 @@ router.get("/moderation",moderatorController.getMod)
 
 router.post('/moderation/users',moderatorController.postUsers)
 
+router.post('/moderation/orders',moderatorController.postOrders)
+
 module.exports = router;

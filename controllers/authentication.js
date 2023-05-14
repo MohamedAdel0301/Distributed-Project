@@ -31,6 +31,9 @@ exports.postLogin = (req,res,next)=>{
         if (doMatch) {
           req.session.isLoggedIn = true;
           req.session.user = user;
+          if(user.type == 1){
+            req.session.isSuper = true;
+          }
           return req.session.save(err => {
             console.log(err);
             res.redirect('/');

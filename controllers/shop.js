@@ -240,7 +240,7 @@ exports.getCheckout = (req,res,next)=>{
       payment_method_types: ['card'],
       line_items: products.map(p => {
         return {
-          quantity: 1,
+          quantity: p.cartItem.quantity,
           price_data: {
             currency: "usd",
             unit_amount: p.price * 100,
@@ -304,16 +304,7 @@ exports.getInvoice = (req, res, next) => {
       .then(products=>{
         products.forEach(prod => {
           totalPrice += prod.orderItem.quantity * prod.price;
-          pdfDoc
-            .fontSize(14)
-            .text(
-              prod.title +
-                ' - ' +
-                prod.orderItem.quantity +
-                ' x ' +
-                '$' +
-                prod.price
-            );
+          pdfDoc.fontSize(14).text(prod.title +' - ' +prod.orderItem.quantity +' x ' + '$' +prod.price);
         });
         pdfDoc.text('---');
         pdfDoc.fontSize(20).text('Total Price: $' + totalPrice);
