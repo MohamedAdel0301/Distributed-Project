@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_51N2vVdGHFd0rkFCfOvRGqG3y9c0EHQqi7J5JWxeSRAGUwYDERmTtK8Q6ojOSEOruId6iQ8sVJxeqD17gbOEVy4mO00iOiJKbLL');
+const stripe = require('stripe')('sk_test_51N2vVdGHFd0rkFCf0UNQ0ml1oGcgOl7HcQHzDHOmVwNu0YckbkCUr3CavYeHwuHwhViMTvxDHdAwnag8NCzm4w7o00ISs5kFL5');
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
@@ -79,7 +79,6 @@ exports.getIndex = (req, res, next) => {
 exports.getCart = (req, res, next) => {
   let message = req.flash('error');
   if (message) {
-    console.log(message);
     message = message[0];
   } else {
     message = null;

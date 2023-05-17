@@ -77,7 +77,7 @@ app.use(errorController.get404);
 Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 User.hasMany(Product);
 User.hasOne(Cart);
-Cart.belongsTo(User);
+Cart.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 Cart.belongsToMany(Product, {through: CartItem});
 Product.belongsToMany(Cart, {through: CartItem});
 Order.belongsTo(User);

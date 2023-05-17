@@ -1,14 +1,19 @@
 const PDFDocument = require('pdfkit');
 const User = require('../models/user');
 const Order = require('../models/order');
+const Product = require('../models/product')
 const fs = require('fs');
 const path = require('path');
 
 exports.getMod = (req,res)=>{
     if(req.session.user.type == 1){
-        res.render('admin/moderation', {
-            path: '/moderation',
-            pageTitle: 'Moderation'
+        Product.findAll()
+        .then(products=>{
+            res.render('admin/moderation', {
+                path: '/moderation',
+                pageTitle: 'Moderation',
+                prods:products
+            })
         })
     }
     else{
@@ -18,6 +23,18 @@ exports.getMod = (req,res)=>{
         });
     }
 }
+
+exports.getProducts = (req, res, next) => {
+    Product.findAll()
+      .then(products => {
+        res.render('admin/moderation', {
+          prods: products,
+          pageTitle: 'All Products',
+          path: '/admin/moderation'
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
 exports.postOrders = (req,res)=>{
     let totalPrice = 0;
@@ -75,3 +92,12 @@ exports.postUsers = (req,res)=>{
     })
     .catch(err => (err));
 }
+
+exports.postDeleteProduct = (req, res, next) => {
+    const prodId = req.body.productId;
+    Product.destroy({where:{id:prodId}})
+      .then(result => {
+        res.redirect('/admin/moderation/');
+      })
+      .catch(err => console.log(err));
+  };

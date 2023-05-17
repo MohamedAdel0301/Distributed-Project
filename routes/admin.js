@@ -21,9 +21,13 @@ router.post('/edit-product', isAuth ,adminController.postEditProduct);
 
 router.post('/delete-product',isAuth , adminController.postDeleteProduct);
 
+router.post('/moderation/delete-product',isAuth , moderatorController.postDeleteProduct);
+
 router.get('/info',isAuth,adminController.getInfo);
 
 router.post("/info/addBalance",adminController.addBalance);
+
+router.post('/info/generatesales',adminController.getSalesReport);
 
 router.get("/moderation",moderatorController.getMod)
 

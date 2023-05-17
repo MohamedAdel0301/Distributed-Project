@@ -1,5 +1,9 @@
 const Product = require('../models/product');
 const User = require('../models/user');
+const path = require('path');
+const PDFDocument = require('pdfkit');
+const fs = require('fs')
+const Order = require('../models/order')
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -89,7 +93,6 @@ exports.postEditProduct = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   Product.findAll({where:{userId:req.session.user.id}})
     .then(products => {
-      console.log(products);
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
@@ -118,6 +121,37 @@ exports.getInfo = (req,res) =>{
       user:user
     });
   })
+}
+
+
+exports.getSalesReport = (req,res) =>{
+  let revenue = 0;
+  const invoiceName = "Sales.pdf";
+  const invoicePath = path.join('data', 'invoices', invoiceName);
+  const pdfDoc = new PDFDocument();
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition','attachment; filename="' + invoiceName + '"');
+  pdfDoc.pipe(fs.createWriteStream(invoicePath));
+  pdfDoc.pipe(res);
+  pdfDoc.fontSize(26).text('Sales Report', {underline: true});
+  pdfDoc.text('-----------------------');
+  Order.findAll()
+  .then(orders=>{
+      orders.forEach(order=>{
+          order.getProducts()
+          .then(products=>{
+              products.forEach(prod => {
+                if(prod.userId == req.session.user.id){
+                  pdfDoc.fontSize(14).text(prod.title +' - ' +prod.orderItem.quantity +' x ' + '$' +prod.price);
+                  revenue += prod.orderItem.quantity*prod.price;
+                  pdfDoc.fontSize(14).text('----------------------------------------');
+                }
+              });
+          })
+      })
+  })
+  setInterval(()=>pdfDoc.fontSize(14).text(`Total Revenune: $${revenue}`),2000);
+  setInterval(()=>pdfDoc.end(),2000);
 }
 
 exports.addBalance= (req,res)=>{

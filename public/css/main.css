@@ -221,6 +221,7 @@ button,input[type="submit"]{
 
 .card__image img {
   width: 100%;
+  max-height:15rem;
 }
 
 .card__actions {
@@ -310,7 +311,6 @@ button,input[type="submit"]{
   .main-header__nav {
     display: flex;
   }
-
   #side-menu-toggle {
     display: none;
   }
