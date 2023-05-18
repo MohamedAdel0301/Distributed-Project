@@ -43,7 +43,7 @@ exports.addProduct = (req,res)=>{
     const country = req.body.country;
     const size = req.body.size;
     const brand = req.body.brand;
-    if(price == NaN || title == null || imageUrl == null || description == null || price == null){
+    if(price == NaN || title == null || imageUrl == null || description == null || price == null || country == null || size == null || brand == null){
         res.status(400).json({
             status: 'Bad Request',
         })

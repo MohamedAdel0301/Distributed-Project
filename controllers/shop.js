@@ -334,9 +334,9 @@ exports.getSearch = (req,res,next)=>{
       countries.push(product.country);
       brands.push(product.brand);
     }
-    sizes = helper.removeDuplicates(sizes);
-    brands = helper.removeDuplicates(brands);
-    countries = helper.removeDuplicates(countries);
+    sizes = helper.removeDuplicates(sizes).sort();
+    brands = helper.removeDuplicates(brands).sort();
+    countries = helper.removeDuplicates(countries).sort();
     if(search){
       const Op = Sequelize.Op;
       Product.findAll({

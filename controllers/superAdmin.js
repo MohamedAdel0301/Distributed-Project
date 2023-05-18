@@ -38,7 +38,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.postOrders = (req,res)=>{
     let totalPrice = 0;
-    const invoiceName = "List of orders";
+    const invoiceName = "List of orders.pdf";
     const invoicePath = path.join('data', 'invoices', invoiceName);
     const pdfDoc = new PDFDocument();
     res.setHeader('Content-Type', 'application/pdf');
@@ -74,7 +74,7 @@ exports.postUsers = (req,res)=>{
     User.findAll()
     .then(users => {
     allusers = users;
-    const invoiceName = "List of users";
+    const invoiceName = "List of users.pdf";
     const invoicePath = path.join('data', 'invoices', invoiceName);
 
     const pdfDoc = new PDFDocument();
